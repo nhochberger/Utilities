@@ -1,45 +1,44 @@
 package hochberger.utilities.eventbus;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-
 public class SimpleEventBusTest {
 
-	@Test
-  public void registerAndReceive() {
-	  EventBus bus = new SimpleEventBus();
-	  SimpleEventReceiver receiver = new SimpleEventReceiver();
-	  bus.register(receiver, SimpleTestEvent.class);
-	  assertEquals(false, receiver.hasReceived());
-	  bus.publish(new SimpleTestEvent());
-	  assertEquals(true, receiver.hasReceived());
-  }
-	
-	protected static class SimpleTestEvent implements Event {
+    @Test
+    public void registerAndReceive() {
+        EventBus bus = new SimpleEventBus();
+        SimpleEventReceiver receiver = new SimpleEventReceiver();
+        bus.register(receiver, SimpleTestEvent.class);
+        assertEquals(false, receiver.hasReceived());
+        bus.publish(new SimpleTestEvent());
+        assertEquals(true, receiver.hasReceived());
+    }
 
-		@Override
-    public void performEvent() {
-	    // TODO Auto-generated method stub
-    }
-	}
-	
-	protected static class SimpleEventReceiver implements EventReceiver {
+    protected static class SimpleTestEvent implements Event {
 
-		protected boolean hasReceived;
-		
-		public SimpleEventReceiver() {
-	    super();
+        @Override
+        public void performEvent() {
+            // TODO Auto-generated method stub
+        }
     }
-		
-		@Override
-    public <TYPE extends Event> void receive(TYPE event) {
-			this.hasReceived = true;
+
+    protected static class SimpleEventReceiver implements EventReceiver {
+
+        protected boolean hasReceived;
+
+        public SimpleEventReceiver() {
+            super();
+        }
+
+        @Override
+        public <TYPE extends Event> void receive(TYPE event) {
+            this.hasReceived = true;
+        }
+
+        public boolean hasReceived() {
+            return this.hasReceived;
+        }
     }
-		
-		public boolean hasReceived() {
-	    return this.hasReceived;
-    }
-	}
 }
