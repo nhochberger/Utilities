@@ -28,7 +28,7 @@ public abstract class EDTSafeFrame {
      * Convenience method delegating to <code>frame().add(component)</code>
      */
     protected void add(final JComponent component) {
-        frame().add(component);
+        frame().getContentPane().add(component);
     }
 
     /**
