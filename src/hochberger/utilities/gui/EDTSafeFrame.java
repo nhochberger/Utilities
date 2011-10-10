@@ -32,6 +32,13 @@ public abstract class EDTSafeFrame {
     }
 
     /**
+     * Convenience method delegating to <code>frame().add(component, constraint)</code>
+     */
+    protected void add(final JComponent component, Object constraint) {
+        frame().getContentPane().add(component, constraint);
+    }
+    
+    /**
      * Convenience method delegating to <code>frame().setTitle(title)</code>
      */
     protected void setTitle(final String title) {
@@ -51,7 +58,15 @@ public abstract class EDTSafeFrame {
     protected void setSize(int width, int height) {
         this.frame.setSize(new Dimension(width, height));
     }
+    
+    protected void exitOnClose() {
+    	this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 
+    protected void notResizable() {
+    	this.frame.setResizable(false);
+    }
+    
     private void buildUIInternal() {
         this.frame = new JFrame();
         buildUI();
@@ -115,7 +130,7 @@ public abstract class EDTSafeFrame {
 		this.frame = null;
     }
 
-    private void performBlockingOnEDT(final Runnable runnable) {
+    protected void performBlockingOnEDT(final Runnable runnable) {
         try {
             EventQueue.invokeAndWait(runnable);
         } catch (InterruptedException e) {

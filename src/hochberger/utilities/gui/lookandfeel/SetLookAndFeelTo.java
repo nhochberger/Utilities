@@ -21,6 +21,10 @@ public class SetLookAndFeelTo {
     public static void customLookAndFeel(final String lookAndFeelClassName) {
         setLookAndFeel(lookAndFeelClassName);
     }
+    
+    public static void nimbusLookAndFeel() {
+    	setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+    }
 
     private static void setLookAndFeel(final String lookAndFellClassName) {
         try {
