@@ -10,6 +10,7 @@
  ******************************************************************************/
 package hochberger.utilities.gui;
 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.LayoutManager;
@@ -34,6 +35,14 @@ public abstract class EDTSafeFrame {
 	 */
 	protected JFrame frame() {
 		return this.frame;
+	}
+
+	protected Container getContentPane() {
+		return frame().getContentPane();
+	}
+
+	protected void setContentPane(Container contentPane) {
+		frame().setContentPane(contentPane);
 	}
 
 	/**

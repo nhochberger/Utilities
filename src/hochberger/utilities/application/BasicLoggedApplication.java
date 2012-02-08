@@ -30,6 +30,10 @@ public abstract class BasicLoggedApplication {
 		return logger;
 	}
 
+	public abstract void start();
+
+	public abstract void stop();
+
 	public static class LoggerNotInitializedException extends RuntimeException {
 
 		private static final long serialVersionUID = 5684561354843006032L;
