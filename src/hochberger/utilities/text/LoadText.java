@@ -10,6 +10,8 @@
  ******************************************************************************/
 package hochberger.utilities.text;
 
+import hochberger.utilities.files.Closer;
+
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -27,6 +29,7 @@ public class LoadText {
             result.append(scanner.nextLine());
             result.append(System.getProperty("line.separator"));
         }
+        Closer.close(scanner);
         return result.toString();
     }
 }

@@ -6,7 +6,7 @@ import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 
-public abstract class BasicLoggedApplication {
+public abstract class BasicLoggedApplication implements Lifecycle {
 
 	private static Logger logger;
 
@@ -30,10 +30,6 @@ public abstract class BasicLoggedApplication {
 		return logger;
 	}
 
-	public abstract void start();
-
-	public abstract void stop();
-
 	public static class LoggerNotInitializedException extends RuntimeException {
 
 		private static final long serialVersionUID = 5684561354843006032L;
@@ -41,6 +37,5 @@ public abstract class BasicLoggedApplication {
 		public LoggerNotInitializedException() {
 			super("Logging services were not yet initialized.");
 		}
-
 	}
 }

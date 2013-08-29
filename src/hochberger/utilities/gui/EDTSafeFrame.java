@@ -13,6 +13,8 @@ package hochberger.utilities.gui;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Frame;
+import java.awt.Image;
 import java.awt.LayoutManager;
 import java.lang.reflect.InvocationTargetException;
 
@@ -23,10 +25,30 @@ public abstract class EDTSafeFrame {
 
 	private JFrame frame;
 	private final String title;
+	private SupposedToBeMaximized maximizedExpectation;
+	
+	private enum SupposedToBeMaximized {
+		YES {
+			@Override
+			public void applyExpectationTo(JFrame frame) {
+				frame.setExtendedState(frame.getExtendedState() | Frame.MAXIMIZED_BOTH);
+			}
+		},
+		NO {
+			@Override
+			public void applyExpectationTo(JFrame frame) {
+				// do nothing here
+			}
+		};
+		
+		public abstract void applyExpectationTo(JFrame frame);
+	}
+
 
 	public EDTSafeFrame(String title) {
 		super();
 		this.title = title;
+		maximizedExpectation = SupposedToBeMaximized.NO;
 	}
 
 	/**
@@ -116,10 +138,11 @@ public abstract class EDTSafeFrame {
 
 			@Override
 			public void run() {
-				if (null == frame()) {
+				if (!isBuilt()) {
 					buildUIInternal();
 				}
 				frame().setVisible(true);
+				maximizedExpectation.applyExpectationTo(frame());
 			}
 		});
 	}
@@ -132,7 +155,7 @@ public abstract class EDTSafeFrame {
 
 			@Override
 			public void run() {
-				if (null != frame()) {
+				if (isBuilt()) {
 					frame().setVisible(false);
 				}
 			}
@@ -147,7 +170,7 @@ public abstract class EDTSafeFrame {
 
 			@Override
 			public void run() {
-				if (null != frame()) {
+				if (isBuilt()) {
 					frame().dispose();
 				}
 			}
@@ -163,5 +186,28 @@ public abstract class EDTSafeFrame {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	protected boolean isBuilt() {
+		return null != frame();
+	}
+	
+	protected void center() {
+		frame().setLocationRelativeTo(null);
+	}
+
+	/**
+	 * can be called at any point, prior to and after showing the frame
+	 */
+	public void maximize() {
+		if (!(isBuilt() && frame().isVisible())) {
+			maximizedExpectation = SupposedToBeMaximized.YES;
+		}
+		SupposedToBeMaximized.NO.applyExpectationTo(frame());
+		return;
+	}
+	
+	protected void setIcon(Image image) {
+		frame().setIconImage(image);
 	}
 }
