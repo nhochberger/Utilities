@@ -2,6 +2,7 @@ package hochberger.utilities.files;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Closer {
 
@@ -18,5 +19,12 @@ public class Closer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void close(Scanner closeable) {
+		if (null == closeable) {
+			return;
+		}
+		closeable.close();
 	}
 }
