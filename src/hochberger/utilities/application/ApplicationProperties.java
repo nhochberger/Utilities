@@ -40,6 +40,10 @@ public class ApplicationProperties {
 		return emptyIfNull(this.properties.getProperty("application.description"));
 	}
 
+	public String otherProperty(String propertyName) {
+		return emptyIfNull(this.properties.getProperty(propertyName));
+	}
+
 	private String emptyIfNull(String text) {
 		if (null == text) {
 			return "";
