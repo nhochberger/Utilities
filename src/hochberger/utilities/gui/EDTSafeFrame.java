@@ -26,7 +26,7 @@ public abstract class EDTSafeFrame {
 	private JFrame frame;
 	private final String title;
 	private SupposedToBeMaximized maximizedExpectation;
-	
+
 	private enum SupposedToBeMaximized {
 		YES {
 			@Override
@@ -40,15 +40,14 @@ public abstract class EDTSafeFrame {
 				// do nothing here
 			}
 		};
-		
+
 		public abstract void applyExpectationTo(JFrame frame);
 	}
-
 
 	public EDTSafeFrame(String title) {
 		super();
 		this.title = title;
-		maximizedExpectation = SupposedToBeMaximized.NO;
+		this.maximizedExpectation = SupposedToBeMaximized.NO;
 	}
 
 	/**
@@ -68,7 +67,8 @@ public abstract class EDTSafeFrame {
 	}
 
 	/**
-	 * Convenience method delegating to <code>frame().add(component)</code>
+	 * Convenience method delegating to
+	 * <code>frame().getContentPane().add(component)</code>
 	 */
 	protected void add(final JComponent component) {
 		frame().getContentPane().add(component);
@@ -76,7 +76,7 @@ public abstract class EDTSafeFrame {
 
 	/**
 	 * Convenience method delegating to
-	 * <code>frame().add(component, constraint)</code>
+	 * <code>frame().getContentPane().add(component, constraint)</code>
 	 */
 	protected void add(final JComponent component, Object constraint) {
 		frame().getContentPane().add(component, constraint);
@@ -114,8 +114,10 @@ public abstract class EDTSafeFrame {
 
 	private void buildUIInternal() {
 		this.frame = new JFrame();
+		preBuildHooks();
 		setTitle(this.title);
 		buildUI();
+		postBuildHooks();
 	}
 
 	/**
@@ -126,6 +128,21 @@ public abstract class EDTSafeFrame {
 	 * accessed via {@link frame()}.
 	 */
 	protected abstract void buildUI();
+
+	/**
+	 * this method is executed directly after the frame is created but directly
+	 * before buildUI() is called
+	 */
+	protected void preBuildHooks() {
+		// intended for subclassing
+	}
+
+	/**
+	 * this method is executed directly after buildUI() has finished
+	 */
+	protected void postBuildHooks() {
+		// intended for subclassing
+	}
 
 	/**
 	 * Sets the visibility of the frame to <code>true</code> and, if not already
@@ -142,7 +159,7 @@ public abstract class EDTSafeFrame {
 					buildUIInternal();
 				}
 				frame().setVisible(true);
-				maximizedExpectation.applyExpectationTo(frame());
+				EDTSafeFrame.this.maximizedExpectation.applyExpectationTo(frame());
 			}
 		});
 	}
@@ -187,11 +204,11 @@ public abstract class EDTSafeFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	protected boolean isBuilt() {
 		return null != frame();
 	}
-	
+
 	protected void center() {
 		frame().setLocationRelativeTo(null);
 	}
@@ -201,12 +218,12 @@ public abstract class EDTSafeFrame {
 	 */
 	public void maximize() {
 		if (!(isBuilt() && frame().isVisible())) {
-			maximizedExpectation = SupposedToBeMaximized.YES;
+			this.maximizedExpectation = SupposedToBeMaximized.YES;
 		}
 		SupposedToBeMaximized.NO.applyExpectationTo(frame());
 		return;
 	}
-	
+
 	protected void setIcon(Image image) {
 		frame().setIconImage(image);
 	}
