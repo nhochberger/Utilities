@@ -1,10 +1,15 @@
 package hochberger.utilities.gui;
 
+import hochberger.utilities.application.ActionListenerHandler;
+import hochberger.utilities.text.Text;
+
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,6 +24,7 @@ public class ImageButton extends JComponent {
 	private Image activeImage;
 	private final Image disabledImage;
 	private final Dimension dimension;
+	private final ActionListenerHandler listenerHandler;
 
 	public ImageButton(Image image) {
 		this(image, image, image, image);
@@ -36,6 +42,7 @@ public class ImageButton extends JComponent {
 				clickImage);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addMouseListener(new ImageButtonMouseAdapter());
+		this.listenerHandler = new ActionListenerHandler();
 	}
 
 	@Override
@@ -58,6 +65,16 @@ public class ImageButton extends JComponent {
 		return getSize();
 	}
 
+	@Override
+	public void setEnabled(boolean enabled) {
+		if (enabled) {
+			this.activeImage = this.defaultImage;
+		} else {
+			this.activeImage = this.disabledImage;
+		}
+		super.setEnabled(enabled);
+	}
+
 	private Dimension determineDimension(Image... images) {
 		int width = 0;
 		int height = 0;
@@ -72,9 +89,12 @@ public class ImageButton extends JComponent {
 		return new Dimension(width, height);
 	}
 
-	@Override
-	public void setEnabled(boolean enabled) {
-		super.setEnabled(enabled);
+	public void addActionListener(ActionListener listener) {
+		this.listenerHandler.addActionListener(listener);
+	}
+
+	public void removeActionListener(ActionListener listener) {
+		this.listenerHandler.removeActionListener(listener);
 	}
 
 	private final class ImageButtonMouseAdapter extends MouseAdapter {
@@ -88,6 +108,9 @@ public class ImageButton extends JComponent {
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
+			if (!isEnabled()) {
+				return;
+			}
 			if (this.stillPressed) {
 				return;
 			}
@@ -97,6 +120,9 @@ public class ImageButton extends JComponent {
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			if (!isEnabled()) {
+				return;
+			}
 			if (this.stillPressed) {
 				return;
 			}
@@ -106,6 +132,9 @@ public class ImageButton extends JComponent {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
+			if (!isEnabled()) {
+				return;
+			}
 			this.stillPressed = true;
 			ImageButton.this.activeImage = ImageButton.this.clickImage;
 			repaint();
@@ -113,9 +142,19 @@ public class ImageButton extends JComponent {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
+			if (!isEnabled()) {
+				return;
+			}
 			this.stillPressed = false;
 			ImageButton.this.activeImage = ImageButton.this.hoverImage;
 			repaint();
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			ImageButton.this.listenerHandler
+					.invokeActionPerformed(new ActionEvent(ImageButton.this,
+							ActionEvent.ACTION_PERFORMED, Text.empty()));
 		}
 	}
 }
