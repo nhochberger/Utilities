@@ -27,4 +27,8 @@ public class ActionListenerHandler {
 			listener.actionPerformed(event);
 		}
 	}
+
+	public void invokeActionPerformed(Object source, int id, String command) {
+		invokeActionPerformed(new ActionEvent(source, id, command));
+	}
 }
