@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -15,6 +16,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JComponent;
 import javax.swing.Timer;
+
+import edt.EDT;
 
 public class VerticallyGrowingButton extends JComponent implements
 		TimerListener {
@@ -162,11 +165,39 @@ public class VerticallyGrowingButton extends JComponent implements
 	}
 
 	private void drawTextOn(Graphics2D graphics) {
+		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		setFontOn(graphics);
+		int distanceToLowerBottom = determineBottomMargin();
+		int distanceToLeftBorder = determineLeftMargin();
 		graphics.setColor(this.textShadowColor);
-		graphics.drawString(this.text, 11, this.maxHeight - 9);
+		int shadowOffset = 1;
+		graphics.drawString(this.text, (distanceToLeftBorder + shadowOffset),
+				distanceToLowerBottom - shadowOffset);
 		setFontColorOn(graphics);
-		graphics.drawString(this.text, 10, this.maxHeight - 10);
+		graphics.drawString(this.text, distanceToLeftBorder,
+				distanceToLowerBottom);
+	}
+
+	// WORKAROUND
+	/**
+	 * Note that this yields only an approximation of the desired value
+	 * getAscend / 2 may not be correct for some fonts but should yield
+	 * sufficiently exact values for most fonts
+	 */
+	private int determineBottomMargin() {
+		return this.maxHeight - ((this.minHeight / 2)
+				- (getFontMetrics(getFont()).getAscent() / 2))
+				- ((this.currentHeight - this.minHeight) / 2);
+	}
+
+	private int determineLeftMargin() {
+		int margin = 10;
+		if (NO_IMAGE == this.image) {
+			return margin;
+		}
+		margin += this.image.getWidth(null);
+		return margin;
 	}
 
 	private void setFontColorOn(Graphics2D graphics) {
@@ -189,7 +220,12 @@ public class VerticallyGrowingButton extends JComponent implements
 		if (NO_IMAGE == this.image) {
 			return;
 		}
-		graphics.drawImage(this.image, 10, 0, null);
+		int imageHeight = this.image.getHeight(null);
+		int bottomMargin = this.maxHeight
+				- ((this.currentHeight - this.minHeight) / 2)
+				- (3 * imageHeight / 2);
+		graphics.drawImage(this.image, 10,
+				bottomMargin, null);
 	}
 
 	private void setFontOn(Graphics2D graphics) {
@@ -229,6 +265,7 @@ public class VerticallyGrowingButton extends JComponent implements
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
+			EDT.only();
 			super.mouseEntered(e);
 			if (!isEnabled()) {
 				return;

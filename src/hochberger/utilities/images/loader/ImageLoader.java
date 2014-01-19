@@ -31,6 +31,7 @@ public class ImageLoader {
 	}
 
 	public static Icon loadIcon(final String filePath) {
-		return new ImageIcon(Toolkit.getDefaultToolkit().createImage(ClassLoader.getSystemResource(filePath)));
+		return new ImageIcon(Toolkit.getDefaultToolkit().createImage(
+				ClassLoader.getSystemResource(filePath)));
 	}
 }
