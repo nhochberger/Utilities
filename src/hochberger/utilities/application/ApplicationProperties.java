@@ -19,9 +19,15 @@ public class ApplicationProperties {
 
 	private final Properties properties;
 
-	public ApplicationProperties() throws IOException {
+	public ApplicationProperties() throws PropertiesNotFoundException  {
 		super();
-		this.properties = LoadProperties.from("settings/application.properties");
+		try {
+			this.properties = LoadProperties.from("settings/application.properties");
+		} catch (NullPointerException e) {
+			throw new PropertiesNotFoundException();
+		} catch (IOException e) {
+			throw new PropertiesNotFoundException();
+		}
 	}
 
 	public String title() {
@@ -49,5 +55,14 @@ public class ApplicationProperties {
 			return "";
 		}
 		return text;
+	}
+	
+	public static class PropertiesNotFoundException extends IOException {
+
+		private static final long serialVersionUID = -4794347516673490873L;
+
+		public PropertiesNotFoundException() {
+			super("Unable to load properties");
+		}
 	}
 }
