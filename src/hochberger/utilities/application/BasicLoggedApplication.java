@@ -10,13 +10,13 @@ public abstract class BasicLoggedApplication implements Lifecycle {
 
 	private static Logger logger;
 
-	protected static void setUpLoggingServices(Class<?> applicationClass) {
+	protected static void setUpLoggingServices(final Class<?> applicationClass) {
 		try {
 			logger = Logger.getLogger(applicationClass);
-			Layout layout = new SimpleLayout();
+			final Layout layout = new SimpleLayout();
 			logger.addAppender(new ConsoleAppender(layout));
 			logger.addAppender(new FileAppender(layout, "logs/main.log"));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.err.println("Error while setting up logging service. Application will be shut down.");
 			e.printStackTrace();
 			System.exit(0);

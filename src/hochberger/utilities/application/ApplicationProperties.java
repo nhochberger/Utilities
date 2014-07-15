@@ -23,9 +23,9 @@ public class ApplicationProperties {
 		super();
 		try {
 			this.properties = LoadProperties.from("settings/application.properties");
-		} catch (NullPointerException e) {
+		} catch (final NullPointerException e) {
 			throw new PropertiesNotFoundException();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new PropertiesNotFoundException();
 		}
 	}
@@ -46,11 +46,11 @@ public class ApplicationProperties {
 		return emptyIfNull(this.properties.getProperty("application.description"));
 	}
 
-	public String otherProperty(String propertyName) {
+	public String otherProperty(final String propertyName) {
 		return emptyIfNull(this.properties.getProperty(propertyName));
 	}
 
-	private String emptyIfNull(String text) {
+	private String emptyIfNull(final String text) {
 		if (null == text) {
 			return "";
 		}

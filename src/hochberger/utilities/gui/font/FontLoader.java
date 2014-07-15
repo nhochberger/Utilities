@@ -13,16 +13,16 @@ public class FontLoader {
 		super();
 	}
 
-	public static Font loadFrom(String filePath) {
-		InputStream inputStream = ClassLoader
+	public static Font loadFrom(final String filePath) {
+		final InputStream inputStream = ClassLoader
 				.getSystemResourceAsStream(filePath);
 		Font result = null;
 		try {
 			result = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-		} catch (FontFormatException e) {
+		} catch (final FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {

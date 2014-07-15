@@ -31,39 +31,39 @@ public class VerticallyGrowingButtonBuilder {
 		this.textShadowColor = Color.GRAY;
 	}
 
-	public static VerticallyGrowingButtonBuilder newButtonWithText(String text) {
+	public static VerticallyGrowingButtonBuilder newButtonWithText(final String text) {
 		return new VerticallyGrowingButtonBuilder().andText(text);
 	}
 
-	public static VerticallyGrowingButtonBuilder newButtonWithImage(Image image) {
+	public static VerticallyGrowingButtonBuilder newButtonWithImage(final Image image) {
 		return new VerticallyGrowingButtonBuilder().andImage(image);
 	}
 
-	public VerticallyGrowingButtonBuilder andText(String text) {
+	public VerticallyGrowingButtonBuilder andText(final String text) {
 		this.text = text;
 		return this;
 	}
 
-	public VerticallyGrowingButtonBuilder andImage(Image image) {
+	public VerticallyGrowingButtonBuilder andImage(final Image image) {
 		this.image = image;
 		return this;
 	}
 
-	public VerticallyGrowingButtonBuilder andDimensions(int width,
-			int minHeight, int MaxHeight) {
+	public VerticallyGrowingButtonBuilder andDimensions(final int width,
+			final int minHeight, final int MaxHeight) {
 		this.width = width;
 		this.minHeight = minHeight;
 		this.maxHeight = MaxHeight;
 		return this;
 	}
 
-	public VerticallyGrowingButtonBuilder andFont(Font font) {
+	public VerticallyGrowingButtonBuilder andFont(final Font font) {
 		this.font = font;
 		return this;
 	}
 
-	public VerticallyGrowingButtonBuilder andColors(Color buttonColor,
-			Color textColor, Color textShadowColor) {
+	public VerticallyGrowingButtonBuilder andColors(final Color buttonColor,
+			final Color textColor, final Color textShadowColor) {
 		this.buttonColor = buttonColor;
 		this.textColor = textColor;
 		this.textShadowColor = textShadowColor;

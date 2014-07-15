@@ -6,7 +6,7 @@ public abstract class SessionBasedObject {
 
 	private final BasicSession session;
 
-	protected SessionBasedObject(BasicSession session) {
+	protected SessionBasedObject(final BasicSession session) {
 		super();
 		this.session = session;
 	}

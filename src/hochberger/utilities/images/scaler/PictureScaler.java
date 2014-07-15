@@ -57,15 +57,15 @@ public class PictureScaler {
 	 *            targetHeight is smaller than the original dimensions)
 	 * @return a scaled version of the original BufferedImage
 	 */
-	public BufferedImage getFasterScaledInstance(BufferedImage img, int targetWidth, int targetHeight, Object hint, boolean progressiveBilinear) {
-		int type = (img.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
+	public BufferedImage getFasterScaledInstance(final BufferedImage img, final int targetWidth, final int targetHeight, final Object hint, final boolean progressiveBilinear) {
+		final int type = (img.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
 		BufferedImage ret = img;
 		BufferedImage scratchImage = null;
 		Graphics2D g2 = null;
 		int w, h;
 		int prevW = ret.getWidth();
 		int prevH = ret.getHeight();
-		boolean isTranslucent = img.getTransparency() != Transparency.OPAQUE;
+		final boolean isTranslucent = img.getTransparency() != Transparency.OPAQUE;
 
 		if (progressiveBilinear) {
 			// Use multi-step technique: start with original size, then
@@ -127,7 +127,7 @@ public class PictureScaler {
 		return ret;
 	}
 
-	public BufferedImage getFasterScaledInstance(Image img, int targetWidth, int targetHeight, Object hint, boolean progressiveBilinear) {
+	public BufferedImage getFasterScaledInstance(final Image img, final int targetWidth, final int targetHeight, final Object hint, final boolean progressiveBilinear) {
 		BufferedImage image = null;
 		if (img instanceof BufferedImage) {
 			image = (BufferedImage) img;
@@ -136,31 +136,31 @@ public class PictureScaler {
 		return getFasterScaledInstance(image, targetWidth, targetHeight, hint, progressiveBilinear);
 	}
 
-	private BufferedImage createBufferedImageFrom(Image img) {
-		BufferedImage image = createCompatibleImageFrom(img);
-		Graphics graphics = image.getGraphics().create();
+	private BufferedImage createBufferedImageFrom(final Image img) {
+		final BufferedImage image = createCompatibleImageFrom(img);
+		final Graphics graphics = image.getGraphics().create();
 		graphics.drawImage(img, 0, 0, null);
 		graphics.dispose();
 		return image;
 	}
 
-	private BufferedImage createCompatibleImageFrom(Image img) {
+	private BufferedImage createCompatibleImageFrom(final Image img) {
 		return GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration().createCompatibleImage(img.getWidth(null), img.getHeight(null));
 	}
 
-	public BufferedImage scale(Image img, int targetWidth, int targetHeight) {
+	public BufferedImage scale(final Image img, final int targetWidth, final int targetHeight) {
 		return getFasterScaledInstance(img, targetWidth, targetHeight, RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
 	}
 
-	public BufferedImage scale(BufferedImage img, int targetWidth, int targetHeight) {
+	public BufferedImage scale(final BufferedImage img, final int targetWidth, final int targetHeight) {
 		return getFasterScaledInstance(img, targetWidth, targetHeight, RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
 	}
 
-	public BufferedImage scale(Image img, Dimension targetDimension) {
+	public BufferedImage scale(final Image img, final Dimension targetDimension) {
 		return scale(img, targetDimension.width, targetDimension.height);
 	}
 
-	public BufferedImage scale(BufferedImage img, Dimension targetDimension) {
+	public BufferedImage scale(final BufferedImage img, final Dimension targetDimension) {
 		return scale(img, targetDimension.width, targetDimension.height);
 	}
 }

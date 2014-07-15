@@ -11,7 +11,7 @@ public class CommandExecutor {
 		this.runtime = Runtime.getRuntime();
 	}
 
-	public void executeCommand(String command) throws IOException {
+	public void executeCommand(final String command) throws IOException {
 		this.runtime.exec(command);
 	}
 }

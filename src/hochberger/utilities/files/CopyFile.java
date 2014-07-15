@@ -10,16 +10,16 @@ public class CopyFile {
 
 	private final File source;
 
-	private CopyFile(File source) {
+	private CopyFile(final File source) {
 		super();
 		this.source = source;
 	}
 
-	public static CopyFile from(File source) {
+	public static CopyFile from(final File source) {
 		return new CopyFile(source);
 	}
 
-	public void to(File destination) throws IOException {
+	public void to(final File destination) throws IOException {
 		if (!destination.getParentFile().exists()) {
 			destination.getParentFile().mkdirs();
 		}

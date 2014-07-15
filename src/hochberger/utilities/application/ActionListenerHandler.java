@@ -14,21 +14,21 @@ public class ActionListenerHandler {
 		this.listeners = new ArrayList<ActionListener>();
 	}
 
-	public void addActionListener(ActionListener listener) {
+	public void addActionListener(final ActionListener listener) {
 		this.listeners.add(listener);
 	}
 
-	public void removeActionListener(ActionListener listener) {
+	public void removeActionListener(final ActionListener listener) {
 		this.listeners.remove(listener);
 	}
 
-	public void invokeActionPerformed(ActionEvent event) {
-		for (ActionListener listener : this.listeners) {
+	public void invokeActionPerformed(final ActionEvent event) {
+		for (final ActionListener listener : this.listeners) {
 			listener.actionPerformed(event);
 		}
 	}
 
-	public void invokeActionPerformed(Object source, int id, String command) {
+	public void invokeActionPerformed(final Object source, final int id, final String command) {
 		invokeActionPerformed(new ActionEvent(source, id, command));
 	}
 }

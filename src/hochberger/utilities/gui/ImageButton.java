@@ -26,30 +26,28 @@ public class ImageButton extends JComponent {
 	private final Dimension dimension;
 	private final ActionListenerHandler listenerHandler;
 
-	public ImageButton(Image image) {
+	public ImageButton(final Image image) {
 		this(image, image, image, image);
 	}
 
-	public ImageButton(Image defaultImage, Image hoverImage, Image clickImage,
-			Image disabledImage) {
+	public ImageButton(final Image defaultImage, final Image hoverImage, final Image clickImage, final Image disabledImage) {
 		super();
 		this.defaultImage = defaultImage;
 		this.hoverImage = hoverImage;
 		this.clickImage = clickImage;
 		this.activeImage = defaultImage;
 		this.disabledImage = disabledImage;
-		this.dimension = determineDimension(defaultImage, hoverImage,
-				clickImage);
+		this.dimension = determineDimension(defaultImage, hoverImage, clickImage);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addMouseListener(new ImageButtonMouseAdapter());
 		this.listenerHandler = new ActionListenerHandler();
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(final Graphics g) {
 		setSize(getSize());
 		doLayout();
-		Graphics2D graphics = (Graphics2D) g.create();
+		final Graphics2D graphics = (Graphics2D) g.create();
 		graphics.drawImage(this.activeImage, 0, 0, null);
 		graphics.dispose();
 		super.paintComponent(g);
@@ -66,7 +64,7 @@ public class ImageButton extends JComponent {
 	}
 
 	@Override
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(final boolean enabled) {
 		if (enabled) {
 			this.activeImage = this.defaultImage;
 		} else {
@@ -75,10 +73,10 @@ public class ImageButton extends JComponent {
 		super.setEnabled(enabled);
 	}
 
-	private Dimension determineDimension(Image... images) {
+	private Dimension determineDimension(final Image... images) {
 		int width = 0;
 		int height = 0;
-		for (Image image : images) {
+		for (final Image image : images) {
 			if (height < image.getHeight(null)) {
 				height = image.getHeight(null);
 			}
@@ -89,11 +87,11 @@ public class ImageButton extends JComponent {
 		return new Dimension(width, height);
 	}
 
-	public void addActionListener(ActionListener listener) {
+	public void addActionListener(final ActionListener listener) {
 		this.listenerHandler.addActionListener(listener);
 	}
 
-	public void removeActionListener(ActionListener listener) {
+	public void removeActionListener(final ActionListener listener) {
 		this.listenerHandler.removeActionListener(listener);
 	}
 
@@ -107,7 +105,7 @@ public class ImageButton extends JComponent {
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
+		public void mouseEntered(final MouseEvent e) {
 			if (!isEnabled()) {
 				return;
 			}
@@ -119,7 +117,7 @@ public class ImageButton extends JComponent {
 		}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
+		public void mouseExited(final MouseEvent e) {
 			if (!isEnabled()) {
 				return;
 			}
@@ -131,7 +129,7 @@ public class ImageButton extends JComponent {
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
+		public void mousePressed(final MouseEvent e) {
 			if (!isEnabled()) {
 				return;
 			}
@@ -141,7 +139,7 @@ public class ImageButton extends JComponent {
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
+		public void mouseReleased(final MouseEvent e) {
 			if (!isEnabled()) {
 				return;
 			}
@@ -151,10 +149,8 @@ public class ImageButton extends JComponent {
 		}
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			ImageButton.this.listenerHandler
-					.invokeActionPerformed(new ActionEvent(ImageButton.this,
-							ActionEvent.ACTION_PERFORMED, Text.empty()));
+		public void mouseClicked(final MouseEvent e) {
+			ImageButton.this.listenerHandler.invokeActionPerformed(new ActionEvent(ImageButton.this, ActionEvent.ACTION_PERFORMED, Text.empty()));
 		}
 	}
 }

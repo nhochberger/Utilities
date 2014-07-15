@@ -21,20 +21,20 @@ public abstract class BackgroundedPanel extends JPanel {
 
 	private static final long serialVersionUID = -2770665145529513039L;
 
-	public BackgroundedPanel(Image image) {
+	public BackgroundedPanel(final Image image) {
 		this(image, true);
 	}
 
-	public BackgroundedPanel(Image image, boolean isDoubleBuffered) {
+	public BackgroundedPanel(final Image image, final boolean isDoubleBuffered) {
 		this(image, new FlowLayout(), isDoubleBuffered);
 	}
 
-	public BackgroundedPanel(Image image, LayoutManager layout, boolean isDoubleBuffered) {
+	public BackgroundedPanel(final Image image, final LayoutManager layout, final boolean isDoubleBuffered) {
 		super(layout, isDoubleBuffered);
 		setUI(createUI(image));
 	}
 
-	public BackgroundedPanel(Image image, LayoutManager layout) {
+	public BackgroundedPanel(final Image image, final LayoutManager layout) {
 		this(image, layout, true);
 	}
 

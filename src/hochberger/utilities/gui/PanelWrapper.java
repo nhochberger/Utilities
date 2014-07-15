@@ -23,15 +23,15 @@ public class PanelWrapper {
     }
 
     public static JPanel wrap(final JComponent... components) {
-        JPanel panel = new JPanel(new FlowLayout());
-        for (JComponent component : components) {
+        final JPanel panel = new JPanel(new FlowLayout());
+        for (final JComponent component : components) {
             panel.add(component);
         }
         return panel;
     }
 
     public static JPanel wrapWithBackground(final Color color, final JComponent... components) {
-        JPanel result = wrap(components);
+        final JPanel result = wrap(components);
         result.setBackground(color);
         return result;
     }

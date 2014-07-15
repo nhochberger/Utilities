@@ -30,13 +30,13 @@ public abstract class EDTSafeFrame {
 	private enum SupposedToBeMaximized {
 		YES {
 			@Override
-			public void applyExpectationTo(JFrame frame) {
+			public void applyExpectationTo(final JFrame frame) {
 				frame.setExtendedState(frame.getExtendedState() | Frame.MAXIMIZED_BOTH);
 			}
 		},
 		NO {
 			@Override
-			public void applyExpectationTo(JFrame frame) {
+			public void applyExpectationTo(final JFrame frame) {
 				// do nothing here
 			}
 		};
@@ -44,7 +44,7 @@ public abstract class EDTSafeFrame {
 		public abstract void applyExpectationTo(JFrame frame);
 	}
 
-	public EDTSafeFrame(String title) {
+	public EDTSafeFrame(final String title) {
 		super();
 		this.title = title;
 		this.maximizedExpectation = SupposedToBeMaximized.NO;
@@ -62,7 +62,7 @@ public abstract class EDTSafeFrame {
 		return frame().getContentPane();
 	}
 
-	protected void setContentPane(Container contentPane) {
+	protected void setContentPane(final Container contentPane) {
 		frame().setContentPane(contentPane);
 	}
 
@@ -78,7 +78,7 @@ public abstract class EDTSafeFrame {
 	 * Convenience method delegating to
 	 * <code>frame().getContentPane().add(component, constraint)</code>
 	 */
-	protected void add(final JComponent component, Object constraint) {
+	protected void add(final JComponent component, final Object constraint) {
 		frame().getContentPane().add(component, constraint);
 	}
 
@@ -100,7 +100,7 @@ public abstract class EDTSafeFrame {
 	/**
 	 * Convenience method replacing <code>frame().setSize(dimension)</code>
 	 */
-	protected void setSize(int width, int height) {
+	protected void setSize(final int width, final int height) {
 		this.frame.setSize(new Dimension(width, height));
 	}
 
@@ -198,9 +198,9 @@ public abstract class EDTSafeFrame {
 	protected void performBlockingOnEDT(final Runnable runnable) {
 		try {
 			EventQueue.invokeAndWait(runnable);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (final InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
@@ -224,7 +224,7 @@ public abstract class EDTSafeFrame {
 		return;
 	}
 
-	protected void setIcon(Image image) {
+	protected void setIcon(final Image image) {
 		frame().setIconImage(image);
 	}
 }

@@ -17,11 +17,11 @@ public class IntegerStringInputValidator implements InputValidator<String> {
 	}
 
 	@Override
-	public boolean isValid(String input) {
+	public boolean isValid(final String input) {
 		try {
 			Integer.parseInt(input);
 			return true;
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return false;
 		}
 	}

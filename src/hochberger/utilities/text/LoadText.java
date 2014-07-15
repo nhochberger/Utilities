@@ -22,9 +22,9 @@ public class LoadText {
     }
 
     public static String from(final String filePath) {
-        StringBuilder result = new StringBuilder();
-        InputStream inputStream = ClassLoader.getSystemResourceAsStream(filePath);
-        Scanner scanner = new Scanner(inputStream);
+        final StringBuilder result = new StringBuilder();
+        final InputStream inputStream = ClassLoader.getSystemResourceAsStream(filePath);
+        final Scanner scanner = new Scanner(inputStream);
         while (scanner.hasNext()) {
             result.append(scanner.nextLine());
             result.append(System.getProperty("line.separator"));

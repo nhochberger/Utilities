@@ -39,7 +39,7 @@ public class SetLookAndFeelTo {
     private static void setLookAndFeel(final String lookAndFellClassName) {
         try {
             UIManager.setLookAndFeel(lookAndFellClassName);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             LogToConsole.debug("Unable to set Look and Feel to " + lookAndFellClassName, e);
         }
     }

@@ -20,7 +20,7 @@ public class LoadProperties {
     }
 
     public static Properties from(final String filePath) throws IOException {
-        Properties result = new Properties();
+        final Properties result = new Properties();
         result.load(ClassLoader.getSystemResourceAsStream(filePath));
         return result;
     }

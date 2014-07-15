@@ -20,7 +20,7 @@ public class ThreadRunner {
         new Thread(runnable).start();
     }
     
-    public static void startThread(final Runnable runnable, String threadName) {
+    public static void startThread(final Runnable runnable, final String threadName) {
         new Thread(runnable, threadName).start();
     }
 }

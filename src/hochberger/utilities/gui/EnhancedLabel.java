@@ -21,22 +21,22 @@ public class EnhancedLabel extends JLabel {
 	private Color leftColor;
 	private Color rightColor;
 
-	public EnhancedLabel(String text, int tracking) {
+	public EnhancedLabel(final String text, final int tracking) {
 		super(text);
 		this.tracking = tracking;
 	}
 
-	public EnhancedLabel(String text) {
+	public EnhancedLabel(final String text) {
 		this(text, 0);
 	}
 
-	public void setLeftShadow(int x, int y, Color color) {
+	public void setLeftShadow(final int x, final int y, final Color color) {
 		this.leftX = x;
 		this.leftY = y;
 		this.leftColor = color;
 	}
 
-	public void setRightShadow(int x, int y, Color color) {
+	public void setRightShadow(final int x, final int y, final Color color) {
 		this.rightX = x;
 		this.rightY = y;
 		this.rightColor = color;
@@ -44,8 +44,8 @@ public class EnhancedLabel extends JLabel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		String text = getText();
-		FontMetrics fm = this.getFontMetrics(getFont());
+		final String text = getText();
+		final FontMetrics fm = this.getFontMetrics(getFont());
 
 		int w = fm.stringWidth(text);
 		w += (text.length() - 1) * this.tracking;
@@ -56,16 +56,16 @@ public class EnhancedLabel extends JLabel {
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
+	public void paintComponent(final Graphics g) {
 		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		char[] chars = getText().toCharArray();
-		FontMetrics fm = this.getFontMetrics(getFont());
+		final char[] chars = getText().toCharArray();
+		final FontMetrics fm = this.getFontMetrics(getFont());
 
-		int h = fm.getAscent();
+		final int h = fm.getAscent();
 		int x = 0;
 		for (int i = 0; i < chars.length; i++) {
-			char ch = chars[i];
-			int w = fm.charWidth(ch) + this.tracking;
+			final char ch = chars[i];
+			final int w = fm.charWidth(ch) + this.tracking;
 			g.setColor(this.leftColor);
 			g.drawString("" + chars[i], x - this.leftX, h - this.leftY);
 			g.setColor(this.rightColor);

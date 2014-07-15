@@ -2,7 +2,7 @@ package hochberger.utilities.gui;
 
 public abstract class UndecoratedEDTSafeFrame extends EDTSafeFrame {
 
-	public UndecoratedEDTSafeFrame(String title) {
+	public UndecoratedEDTSafeFrame(final String title) {
 		super(title);
 	}
 

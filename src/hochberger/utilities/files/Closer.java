@@ -10,18 +10,18 @@ public class Closer {
 		super();
 	}
 
-	public static void close(Closeable closeable) {
+	public static void close(final Closeable closeable) {
 		if (null == closeable) {
 			return;
 		}
 		try {
 			closeable.close();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void close(Scanner closeable) {
+	public static void close(final Scanner closeable) {
 		if (null == closeable) {
 			return;
 		}

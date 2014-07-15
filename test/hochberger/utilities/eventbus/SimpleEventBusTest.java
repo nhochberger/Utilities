@@ -18,8 +18,8 @@ public class SimpleEventBusTest {
 
     @Test
     public void registerAndReceive() {
-        EventBus bus = new SimpleEventBus();
-        SimpleEventReceiver receiver = new SimpleEventReceiver();
+        final EventBus bus = new SimpleEventBus();
+        final SimpleEventReceiver receiver = new SimpleEventReceiver();
         bus.register(receiver, SimpleTestEvent.class);
         assertEquals(false, receiver.hasReceived());
         bus.publish(new SimpleTestEvent());
@@ -43,7 +43,7 @@ public class SimpleEventBusTest {
         }
 
         @Override
-        public <TYPE extends Event> void receive(TYPE event) {
+        public <TYPE extends Event> void receive(final TYPE event) {
             this.hasReceived = true;
         }
 

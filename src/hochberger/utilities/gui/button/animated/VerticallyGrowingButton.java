@@ -50,20 +50,20 @@ public class VerticallyGrowingButton extends JComponent implements
 
 		private final int directionFactor;
 
-		private Direction(int factor) {
+		private Direction(final int factor) {
 			this.directionFactor = factor;
 		}
 
-		public int calculateNextStep(int currentValue, int step) {
+		public int calculateNextStep(int currentValue, final int step) {
 			return currentValue += this.directionFactor * step;
 		}
 
 	}
 
-	public VerticallyGrowingButton(String text,
-			Color buttonColor,
-			Color textColor,
-			Color textShadowColor) {
+	public VerticallyGrowingButton(final String text,
+			final Color buttonColor,
+			final Color textColor,
+			final Color textShadowColor) {
 		this(text,
 				NO_IMAGE,
 				buttonColor,
@@ -71,10 +71,10 @@ public class VerticallyGrowingButton extends JComponent implements
 				textShadowColor);
 	}
 
-	public VerticallyGrowingButton(Image image,
-			Color buttonColor,
-			Color textColor,
-			Color textShadowColor) {
+	public VerticallyGrowingButton(final Image image,
+			final Color buttonColor,
+			final Color textColor,
+			final Color textShadowColor) {
 		this(Text.empty(),
 				image,
 				buttonColor,
@@ -82,11 +82,11 @@ public class VerticallyGrowingButton extends JComponent implements
 				textShadowColor);
 	}
 
-	public VerticallyGrowingButton(String text,
-			Image image,
-			Color buttonColor,
-			Color textColor,
-			Color textShadowColor) {
+	public VerticallyGrowingButton(final String text,
+			final Image image,
+			final Color buttonColor,
+			final Color textColor,
+			final Color textShadowColor) {
 		this(text,
 				image,
 				buttonColor,
@@ -98,15 +98,15 @@ public class VerticallyGrowingButton extends JComponent implements
 				DEFAULT_FONT);
 	}
 
-	public VerticallyGrowingButton(String text,
-			Image image,
-			Color buttonColor,
-			Color textColor,
-			Color textShadowColor,
-			int width,
-			int minHeight,
-			int maxHeight,
-			Font font) {
+	public VerticallyGrowingButton(final String text,
+			final Image image,
+			final Color buttonColor,
+			final Color textColor,
+			final Color textShadowColor,
+			final int width,
+			final int minHeight,
+			final int maxHeight,
+			final Font font) {
 		super();
 		this.listeners = new ActionListenerHandler();
 		this.text = text;
@@ -143,18 +143,18 @@ public class VerticallyGrowingButton extends JComponent implements
 		repaint();
 	}
 
-	public void addActionListener(ActionListener listener) {
+	public void addActionListener(final ActionListener listener) {
 		this.listeners.addActionListener(listener);
 	}
 
-	public void removeActionListener(ActionListener listener) {
+	public void removeActionListener(final ActionListener listener) {
 		this.listeners.removeActionListener(listener);
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
+	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
-		Graphics2D graphics = (Graphics2D) g.create();
+		final Graphics2D graphics = (Graphics2D) g.create();
 		setButtonColorOn(graphics);
 		graphics.setClip(0, 0, this.buttonWidth, this.maxHeight);
 		graphics.fillRect(0, this.maxHeight, this.buttonWidth,
@@ -164,14 +164,14 @@ public class VerticallyGrowingButton extends JComponent implements
 		graphics.dispose();
 	}
 
-	private void drawTextOn(Graphics2D graphics) {
+	private void drawTextOn(final Graphics2D graphics) {
 		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		setFontOn(graphics);
-		int distanceToLowerBottom = determineBottomMargin();
-		int distanceToLeftBorder = determineLeftMargin();
+		final int distanceToLowerBottom = determineBottomMargin();
+		final int distanceToLeftBorder = determineLeftMargin();
 		graphics.setColor(this.textShadowColor);
-		int shadowOffset = 1;
+		final int shadowOffset = 1;
 		graphics.drawString(this.text, (distanceToLeftBorder + shadowOffset),
 				distanceToLowerBottom - shadowOffset);
 		setFontColorOn(graphics);
@@ -200,7 +200,7 @@ public class VerticallyGrowingButton extends JComponent implements
 		return margin;
 	}
 
-	private void setFontColorOn(Graphics2D graphics) {
+	private void setFontColorOn(final Graphics2D graphics) {
 		if (isEnabled()) {
 			graphics.setColor(this.textColor);
 			return;
@@ -208,7 +208,7 @@ public class VerticallyGrowingButton extends JComponent implements
 		graphics.setColor(Color.GRAY);
 	}
 
-	private void setButtonColorOn(Graphics2D graphics) {
+	private void setButtonColorOn(final Graphics2D graphics) {
 		if (isEnabled()) {
 			graphics.setColor(this.buttonColor);
 			return;
@@ -216,19 +216,19 @@ public class VerticallyGrowingButton extends JComponent implements
 		graphics.setColor(Color.LIGHT_GRAY);
 	}
 
-	private void drawImageOn(Graphics2D graphics) {
+	private void drawImageOn(final Graphics2D graphics) {
 		if (NO_IMAGE == this.image) {
 			return;
 		}
-		int imageHeight = this.image.getHeight(null);
-		int bottomMargin = this.maxHeight
+		final int imageHeight = this.image.getHeight(null);
+		final int bottomMargin = this.maxHeight
 				- ((this.currentHeight - this.minHeight) / 2)
 				- (3 * imageHeight / 2);
 		graphics.drawImage(this.image, 10,
 				bottomMargin, null);
 	}
 
-	private void setFontOn(Graphics2D graphics) {
+	private void setFontOn(final Graphics2D graphics) {
 		if (DEFAULT_FONT == this.textFont) {
 			return;
 		}
@@ -239,13 +239,13 @@ public class VerticallyGrowingButton extends JComponent implements
 
 		private final TimerListener listener;
 
-		public TimerActionListener(TimerListener listener) {
+		public TimerActionListener(final TimerListener listener) {
 			super();
 			this.listener = listener;
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			this.listener.timerActionPerformed();
 		}
 	}
@@ -253,7 +253,7 @@ public class VerticallyGrowingButton extends JComponent implements
 	private class GrowingButtonMouseListener extends MouseAdapter {
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
+		public void mouseClicked(final MouseEvent e) {
 			super.mouseClicked(e);
 			if (!isEnabled()) {
 				return;
@@ -264,7 +264,7 @@ public class VerticallyGrowingButton extends JComponent implements
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
+		public void mouseEntered(final MouseEvent e) {
 			EDT.only();
 			super.mouseEntered(e);
 			if (!isEnabled()) {
@@ -275,7 +275,7 @@ public class VerticallyGrowingButton extends JComponent implements
 		}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
+		public void mouseExited(final MouseEvent e) {
 			if (!isEnabled()) {
 				return;
 			}

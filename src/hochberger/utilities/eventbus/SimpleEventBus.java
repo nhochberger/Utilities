@@ -51,11 +51,11 @@ public class SimpleEventBus implements EventBus {
 	public <TYPE extends Event> void publish(final TYPE event) {
 		EDT.never();
 		synchronized (this.receivers) {
-			List<EventReceiver> currentlyAddressedReceivers = this.receivers.get(event.getClass());
+			final List<EventReceiver> currentlyAddressedReceivers = this.receivers.get(event.getClass());
 			if (null == currentlyAddressedReceivers) {
 				return;
 			}
-			for (EventReceiver eventReceiver : currentlyAddressedReceivers) {
+			for (final EventReceiver eventReceiver : currentlyAddressedReceivers) {
 				eventReceiver.receive(event);
 			}
 		}

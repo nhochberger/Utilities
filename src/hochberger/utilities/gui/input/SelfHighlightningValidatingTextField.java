@@ -32,7 +32,7 @@ public class SelfHighlightningValidatingTextField extends ValidatingTextField {
 		this(null, null, 0);
 	}
 
-	public SelfHighlightningValidatingTextField(Document doc, String text, int columns) {
+	public SelfHighlightningValidatingTextField(final Document doc, final String text, final int columns) {
 		super(doc, text, columns);
 		addKeyListener(createKeyListener());
 		this.validBackgroundColor = getBackground();
@@ -43,22 +43,22 @@ public class SelfHighlightningValidatingTextField extends ValidatingTextField {
 		this.invalidBorder = getBorder();
 	}
 
-	public SelfHighlightningValidatingTextField(int columns) {
+	public SelfHighlightningValidatingTextField(final int columns) {
 		this(null, null, columns);
 	}
 
-	public SelfHighlightningValidatingTextField(String text, int columns) {
+	public SelfHighlightningValidatingTextField(final String text, final int columns) {
 		this(null, text, columns);
 	}
 
-	public SelfHighlightningValidatingTextField(String text) {
+	public SelfHighlightningValidatingTextField(final String text) {
 		this(null, text, 0);
 	}
 
 	protected KeyListener createKeyListener() {
 		return new KeyAdapter() {
 			@Override
-			public void keyReleased(KeyEvent e) {
+			public void keyReleased(final KeyEvent e) {
 				super.keyTyped(e);
 				if (validateInput()) {
 					setValidSettings();
@@ -97,19 +97,19 @@ public class SelfHighlightningValidatingTextField extends ValidatingTextField {
 		return this.invalidBackgroundColor;
 	}
 
-	public void setValidForegroundColor(Color validForegroundColor) {
+	public void setValidForegroundColor(final Color validForegroundColor) {
 		this.validForegroundColor = validForegroundColor;
 	}
 
-	public void setValidBackgroundColor(Color validBackgroundColor) {
+	public void setValidBackgroundColor(final Color validBackgroundColor) {
 		this.validBackgroundColor = validBackgroundColor;
 	}
 
-	public void setInvalidForegroundColor(Color invalidForegroundColor) {
+	public void setInvalidForegroundColor(final Color invalidForegroundColor) {
 		this.invalidForegroundColor = invalidForegroundColor;
 	}
 
-	public void setInvalidBackgroundColor(Color invalidBackgroundColor) {
+	public void setInvalidBackgroundColor(final Color invalidBackgroundColor) {
 		this.invalidBackgroundColor = invalidBackgroundColor;
 	}
 
@@ -117,7 +117,7 @@ public class SelfHighlightningValidatingTextField extends ValidatingTextField {
 		return this.validBorder;
 	}
 
-	public void setValidBorder(Border validBorder) {
+	public void setValidBorder(final Border validBorder) {
 		this.validBorder = validBorder;
 	}
 
@@ -125,7 +125,7 @@ public class SelfHighlightningValidatingTextField extends ValidatingTextField {
 		return this.invalidBorder;
 	}
 
-	public void setInvalidBorder(Border invalidBorder) {
+	public void setInvalidBorder(final Border invalidBorder) {
 		this.invalidBorder = invalidBorder;
 	}
 }
