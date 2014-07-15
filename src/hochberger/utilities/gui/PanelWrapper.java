@@ -30,7 +30,8 @@ public class PanelWrapper {
         return panel;
     }
 
-    public static JPanel wrapWithBackground(final Color color, final JComponent... components) {
+    public static JPanel wrapWithBackground(final Color color,
+            final JComponent... components) {
         final JPanel result = wrap(components);
         result.setBackground(color);
         return result;

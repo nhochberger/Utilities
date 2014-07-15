@@ -23,7 +23,8 @@ public class LoadText {
 
     public static String from(final String filePath) {
         final StringBuilder result = new StringBuilder();
-        final InputStream inputStream = ClassLoader.getSystemResourceAsStream(filePath);
+        final InputStream inputStream = ClassLoader
+                .getSystemResourceAsStream(filePath);
         final Scanner scanner = new Scanner(inputStream);
         while (scanner.hasNext()) {
             result.append(scanner.nextLine());

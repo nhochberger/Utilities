@@ -9,25 +9,25 @@ import java.io.InputStream;
 
 public class FontLoader {
 
-	private FontLoader() {
-		super();
-	}
+    private FontLoader() {
+        super();
+    }
 
-	public static Font loadFrom(final String filePath) {
-		final InputStream inputStream = ClassLoader
-				.getSystemResourceAsStream(filePath);
-		Font result = null;
-		try {
-			result = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-		} catch (final FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (final IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			Closer.close(inputStream);
-		}
-		return result;
-	}
+    public static Font loadFrom(final String filePath) {
+        final InputStream inputStream = ClassLoader
+                .getSystemResourceAsStream(filePath);
+        Font result = null;
+        try {
+            result = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+        } catch (final FontFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (final IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            Closer.close(inputStream);
+        }
+        return result;
+    }
 }

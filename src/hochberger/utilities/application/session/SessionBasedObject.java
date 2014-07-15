@@ -4,18 +4,18 @@ import org.apache.log4j.Logger;
 
 public abstract class SessionBasedObject {
 
-	private final BasicSession session;
+    private final BasicSession session;
 
-	protected SessionBasedObject(final BasicSession session) {
-		super();
-		this.session = session;
-	}
+    protected SessionBasedObject(final BasicSession session) {
+        super();
+        this.session = session;
+    }
 
-	public BasicSession session() {
-		return session;
-	}
+    public BasicSession session() {
+        return session;
+    }
 
-	public Logger logger() {
-		return session().getLogger();
-	}
+    public Logger logger() {
+        return session().getLogger();
+    }
 }

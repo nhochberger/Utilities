@@ -2,11 +2,11 @@ package hochberger.utilities.text;
 
 public final class Text {
 
-	private Text() {
-		super();
-	}
+    private Text() {
+        super();
+    }
 
-	public static String empty() {
-		return "";
-	}
+    public static String empty() {
+        return "";
+    }
 }

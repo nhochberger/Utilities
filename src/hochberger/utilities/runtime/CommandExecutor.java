@@ -4,14 +4,14 @@ import java.io.IOException;
 
 public class CommandExecutor {
 
-	private final Runtime runtime;
+    private final Runtime runtime;
 
-	public CommandExecutor() {
-		super();
-		this.runtime = Runtime.getRuntime();
-	}
+    public CommandExecutor() {
+        super();
+        this.runtime = Runtime.getRuntime();
+    }
 
-	public void executeCommand(final String command) throws IOException {
-		this.runtime.exec(command);
-	}
+    public void executeCommand(final String command) throws IOException {
+        this.runtime.exec(command);
+    }
 }

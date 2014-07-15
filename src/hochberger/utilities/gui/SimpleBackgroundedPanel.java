@@ -21,34 +21,36 @@ import javax.swing.plaf.PanelUI;
 
 public class SimpleBackgroundedPanel extends BackgroundedPanel {
 
-	private static final long serialVersionUID = -8291249523290165044L;
+    private static final long serialVersionUID = -8291249523290165044L;
 
-	public SimpleBackgroundedPanel(final Image image, final boolean isDoubleBuffered) {
-		this(image, new FlowLayout(), isDoubleBuffered);
-	}
+    public SimpleBackgroundedPanel(final Image image,
+            final boolean isDoubleBuffered) {
+        this(image, new FlowLayout(), isDoubleBuffered);
+    }
 
-	public SimpleBackgroundedPanel(final Image image, final LayoutManager layout, final boolean isDoubleBuffered) {
-		super(image, layout, isDoubleBuffered);
-	}
+    public SimpleBackgroundedPanel(final Image image,
+            final LayoutManager layout, final boolean isDoubleBuffered) {
+        super(image, layout, isDoubleBuffered);
+    }
 
-	public SimpleBackgroundedPanel(final Image image, final LayoutManager layout) {
-		this(image, layout, true);
-	}
+    public SimpleBackgroundedPanel(final Image image, final LayoutManager layout) {
+        this(image, layout, true);
+    }
 
-	public SimpleBackgroundedPanel(final Image image) {
-		this(image, true);
-	}
+    public SimpleBackgroundedPanel(final Image image) {
+        this(image, true);
+    }
 
-	@Override
-	protected PanelUI createUI(final Image image) {
-		return new PanelUI() {
-			@Override
-			public void paint(final Graphics g, final JComponent c) {
-				final Graphics2D graphics = (Graphics2D) g.create();
-				graphics.drawImage(image, 0, 0, null);
-				graphics.dispose();
-				super.paint(g, c);
-			}
-		};
-	}
+    @Override
+    protected PanelUI createUI(final Image image) {
+        return new PanelUI() {
+            @Override
+            public void paint(final Graphics g, final JComponent c) {
+                final Graphics2D graphics = (Graphics2D) g.create();
+                graphics.drawImage(image, 0, 0, null);
+                graphics.dispose();
+                super.paint(g, c);
+            }
+        };
+    }
 }

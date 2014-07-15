@@ -12,17 +12,17 @@ package hochberger.utilities.gui.input.validator;
 
 public class IntegerStringInputValidator implements InputValidator<String> {
 
-	public IntegerStringInputValidator() {
-		super();
-	}
+    public IntegerStringInputValidator() {
+        super();
+    }
 
-	@Override
-	public boolean isValid(final String input) {
-		try {
-			Integer.parseInt(input);
-			return true;
-		} catch (final NumberFormatException e) {
-			return false;
-		}
-	}
+    @Override
+    public boolean isValid(final String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (final NumberFormatException e) {
+            return false;
+        }
+    }
 }

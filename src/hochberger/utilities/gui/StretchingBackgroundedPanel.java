@@ -24,37 +24,42 @@ import javax.swing.plaf.PanelUI;
 
 public class StretchingBackgroundedPanel extends BackgroundedPanel {
 
-	private static final long serialVersionUID = -6328350841770902562L;
+    private static final long serialVersionUID = -6328350841770902562L;
 
-	public StretchingBackgroundedPanel(final Image image, final boolean isDoubleBuffered) {
-		this(image, new FlowLayout(), isDoubleBuffered);
-	}
+    public StretchingBackgroundedPanel(final Image image,
+            final boolean isDoubleBuffered) {
+        this(image, new FlowLayout(), isDoubleBuffered);
+    }
 
-	public StretchingBackgroundedPanel(final Image image, final LayoutManager layout, final boolean isDoubleBuffered) {
-		super(image, layout, isDoubleBuffered);
-	}
+    public StretchingBackgroundedPanel(final Image image,
+            final LayoutManager layout, final boolean isDoubleBuffered) {
+        super(image, layout, isDoubleBuffered);
+    }
 
-	public StretchingBackgroundedPanel(final Image image, final LayoutManager layout) {
-		this(image, layout, true);
-	}
+    public StretchingBackgroundedPanel(final Image image,
+            final LayoutManager layout) {
+        this(image, layout, true);
+    }
 
-	public StretchingBackgroundedPanel(final Image image) {
-		this(image, true);
-	}
+    public StretchingBackgroundedPanel(final Image image) {
+        this(image, true);
+    }
 
-	@Override
-	protected PanelUI createUI(final Image image) {
-		return new PanelUI() {
-			@Override
-			public void paint(final Graphics g, final JComponent c) {
-				final Graphics2D graphics = (Graphics2D) g.create();
-				final PictureScaler scaler = new PictureScaler();
-				final Image stretchedImage = scaler.getFasterScaledInstance(image, c.getWidth(), c.getHeight(), 
-																	  RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
-				graphics.drawImage(stretchedImage, 0, 0, c.getWidth(), c.getHeight(), null);
-				graphics.dispose();
-				super.paint(g, c);
-			}
-		};
-	}
+    @Override
+    protected PanelUI createUI(final Image image) {
+        return new PanelUI() {
+            @Override
+            public void paint(final Graphics g, final JComponent c) {
+                final Graphics2D graphics = (Graphics2D) g.create();
+                final PictureScaler scaler = new PictureScaler();
+                final Image stretchedImage = scaler.getFasterScaledInstance(
+                        image, c.getWidth(), c.getHeight(),
+                        RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
+                graphics.drawImage(stretchedImage, 0, 0, c.getWidth(),
+                        c.getHeight(), null);
+                graphics.dispose();
+                super.paint(g, c);
+            }
+        };
+    }
 }

@@ -19,8 +19,9 @@ public class ThreadRunner {
     public static void startThread(final Runnable runnable) {
         new Thread(runnable).start();
     }
-    
-    public static void startThread(final Runnable runnable, final String threadName) {
+
+    public static void startThread(final Runnable runnable,
+            final String threadName) {
         new Thread(runnable, threadName).start();
     }
 }

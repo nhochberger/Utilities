@@ -20,40 +20,41 @@ import javax.swing.text.Document;
 
 public class ValidatingTextField extends JTextField {
 
-	private static final long serialVersionUID = -8523794628534788170L;
-	private final List<InputValidator<String>> validators;
+    private static final long serialVersionUID = -8523794628534788170L;
+    private final List<InputValidator<String>> validators;
 
-	public ValidatingTextField() {
-		this(null, null, 0);
-	}
+    public ValidatingTextField() {
+        this(null, null, 0);
+    }
 
-	public ValidatingTextField(final int columns) {
-		this(null, null, columns);
-	}
+    public ValidatingTextField(final int columns) {
+        this(null, null, columns);
+    }
 
-	public ValidatingTextField(final String text, final int columns) {
-		this(null, text, columns);
-	}
+    public ValidatingTextField(final String text, final int columns) {
+        this(null, text, columns);
+    }
 
-	public ValidatingTextField(final String text) {
-		this(null, text, 0);
-	}
+    public ValidatingTextField(final String text) {
+        this(null, text, 0);
+    }
 
-	public ValidatingTextField(final Document doc, final String text, final int columns) {
-		super(doc, text, columns);
-		this.validators = new LinkedList<InputValidator<String>>();
-	}
+    public ValidatingTextField(final Document doc, final String text,
+            final int columns) {
+        super(doc, text, columns);
+        this.validators = new LinkedList<InputValidator<String>>();
+    }
 
-	public boolean validateInput() {
-		for (final InputValidator<String> validator : this.validators) {
-			if (!validator.isValid(getText())) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public boolean validateInput() {
+        for (final InputValidator<String> validator : this.validators) {
+            if (!validator.isValid(getText())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	public void addValidator(final InputValidator<String> validator) {
-		this.validators.add(validator);
-	}
+    public void addValidator(final InputValidator<String> validator) {
+        this.validators.add(validator);
+    }
 }

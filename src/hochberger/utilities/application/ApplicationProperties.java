@@ -17,52 +17,55 @@ import java.util.Properties;
 
 public class ApplicationProperties {
 
-	private final Properties properties;
+    private final Properties properties;
 
-	public ApplicationProperties() throws PropertiesNotFoundException  {
-		super();
-		try {
-			this.properties = LoadProperties.from("settings/application.properties");
-		} catch (final NullPointerException e) {
-			throw new PropertiesNotFoundException();
-		} catch (final IOException e) {
-			throw new PropertiesNotFoundException();
-		}
-	}
+    public ApplicationProperties() throws PropertiesNotFoundException {
+        super();
+        try {
+            this.properties = LoadProperties
+                    .from("settings/application.properties");
+        } catch (final NullPointerException e) {
+            throw new PropertiesNotFoundException();
+        } catch (final IOException e) {
+            throw new PropertiesNotFoundException();
+        }
+    }
 
-	public String title() {
-		return emptyIfNull(this.properties.getProperty("application.title"));
-	}
+    public String title() {
+        return emptyIfNull(this.properties.getProperty("application.title"));
+    }
 
-	public String version() {
-		return emptyIfNull(this.properties.getProperty("application.version"));
-	}
+    public String version() {
+        return emptyIfNull(this.properties.getProperty("application.version"));
+    }
 
-	public String description() {
-		return emptyIfNull(this.properties.getProperty("application.description"));
-	}
+    public String description() {
+        return emptyIfNull(this.properties
+                .getProperty("application.description"));
+    }
 
-	public String developers() {
-		return emptyIfNull(this.properties.getProperty("application.description"));
-	}
+    public String developers() {
+        return emptyIfNull(this.properties
+                .getProperty("application.description"));
+    }
 
-	public String otherProperty(final String propertyName) {
-		return emptyIfNull(this.properties.getProperty(propertyName));
-	}
+    public String otherProperty(final String propertyName) {
+        return emptyIfNull(this.properties.getProperty(propertyName));
+    }
 
-	private String emptyIfNull(final String text) {
-		if (null == text) {
-			return "";
-		}
-		return text;
-	}
-	
-	public static class PropertiesNotFoundException extends IOException {
+    private String emptyIfNull(final String text) {
+        if (null == text) {
+            return "";
+        }
+        return text;
+    }
 
-		private static final long serialVersionUID = -4794347516673490873L;
+    public static class PropertiesNotFoundException extends IOException {
 
-		public PropertiesNotFoundException() {
-			super("Unable to load properties");
-		}
-	}
+        private static final long serialVersionUID = -4794347516673490873L;
+
+        public PropertiesNotFoundException() {
+            super("Unable to load properties");
+        }
+    }
 }

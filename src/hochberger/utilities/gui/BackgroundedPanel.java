@@ -19,24 +19,25 @@ import javax.swing.plaf.PanelUI;
 
 public abstract class BackgroundedPanel extends JPanel {
 
-	private static final long serialVersionUID = -2770665145529513039L;
+    private static final long serialVersionUID = -2770665145529513039L;
 
-	public BackgroundedPanel(final Image image) {
-		this(image, true);
-	}
+    public BackgroundedPanel(final Image image) {
+        this(image, true);
+    }
 
-	public BackgroundedPanel(final Image image, final boolean isDoubleBuffered) {
-		this(image, new FlowLayout(), isDoubleBuffered);
-	}
+    public BackgroundedPanel(final Image image, final boolean isDoubleBuffered) {
+        this(image, new FlowLayout(), isDoubleBuffered);
+    }
 
-	public BackgroundedPanel(final Image image, final LayoutManager layout, final boolean isDoubleBuffered) {
-		super(layout, isDoubleBuffered);
-		setUI(createUI(image));
-	}
+    public BackgroundedPanel(final Image image, final LayoutManager layout,
+            final boolean isDoubleBuffered) {
+        super(layout, isDoubleBuffered);
+        setUI(createUI(image));
+    }
 
-	public BackgroundedPanel(final Image image, final LayoutManager layout) {
-		this(image, layout, true);
-	}
+    public BackgroundedPanel(final Image image, final LayoutManager layout) {
+        this(image, layout, true);
+    }
 
-	protected abstract PanelUI createUI(Image image);
+    protected abstract PanelUI createUI(Image image);
 }
