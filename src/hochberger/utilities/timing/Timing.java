@@ -6,21 +6,27 @@ public class Timing {
 
     private long startNanos;
     private long stopNanos;
+    private boolean running = false;
 
     public Timing() {
         super();
     }
 
     public void start() {
+        this.running = true;
         this.startNanos = System.nanoTime();
     }
 
     public void stop() {
         this.stopNanos = System.nanoTime();
+        this.running = false;
     }
 
     public long getNanos() {
-        return this.stopNanos - this.startNanos;
+        if (this.running) {
+            return this.stopNanos - this.startNanos;
+        }
+        return System.nanoTime() - this.startNanos;
     }
 
     public void reportOn(final Logger logger) {
