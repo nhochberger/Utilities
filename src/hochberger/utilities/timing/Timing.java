@@ -1,6 +1,5 @@
 package hochberger.utilities.timing;
 
-import org.apache.log4j.Logger;
 
 public class Timing {
 
@@ -29,8 +28,11 @@ public class Timing {
         return System.nanoTime() - this.startNanos;
     }
 
-    public void reportOn(final Logger logger) {
-        logger.info("Time measured: " + String.valueOf(getNanos())
-                + " nanoseconds.");
+    public long getMilis() {
+        return getNanos() / 1000000;
+    }
+
+    public long getSeconds() {
+        return getNanos() / 1000000000;
     }
 }
