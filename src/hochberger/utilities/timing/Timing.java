@@ -1,6 +1,5 @@
 package hochberger.utilities.timing;
 
-
 public class Timing {
 
     private long startNanos;
@@ -29,10 +28,10 @@ public class Timing {
     }
 
     public long getMilis() {
-        return getNanos() / 1000000;
+        return getNanos() / 1000000 + 1;
     }
 
     public long getSeconds() {
-        return getNanos() / 1000000000;
+        return getNanos() / 1000000000 + 1;
     }
 }
