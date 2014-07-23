@@ -14,4 +14,9 @@ public class SingleParameter implements ParameterAspect {
     public boolean appliesTo(final List<String> args) {
         return 1 == args.size();
     }
+
+    @Override
+    public String getErrorDescription() {
+        return "Exactly one parameter is required.";
+    }
 }
