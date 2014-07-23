@@ -18,6 +18,13 @@ public final class Text {
         return "\n";
     }
 
+    public static String emptyIfNull(final String text) {
+        if (null == text) {
+            return Text.empty();
+        }
+        return text;
+    }
+
     public static String fromIterable(final Iterable<?> iterable) {
         return fromIterable(iterable, Text.empty());
     }

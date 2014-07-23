@@ -4,13 +4,14 @@
  * are made available under the terms of the GNU Lesser Public License v2.1
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
+ *
  * Contributors:
  *     Nico Hochberger - initial API and implementation
  ******************************************************************************/
 package hochberger.utilities.application;
 
 import hochberger.utilities.properties.LoadProperties;
+import hochberger.utilities.text.Text;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -32,32 +33,27 @@ public class ApplicationProperties {
     }
 
     public String title() {
-        return emptyIfNull(this.properties.getProperty("application.title"));
+        return Text.emptyIfNull(this.properties
+                .getProperty("application.title"));
     }
 
     public String version() {
-        return emptyIfNull(this.properties.getProperty("application.version"));
+        return Text.emptyIfNull(this.properties
+                .getProperty("application.version"));
     }
 
     public String description() {
-        return emptyIfNull(this.properties
+        return Text.emptyIfNull(this.properties
                 .getProperty("application.description"));
     }
 
     public String developers() {
-        return emptyIfNull(this.properties
+        return Text.emptyIfNull(this.properties
                 .getProperty("application.description"));
     }
 
     public String otherProperty(final String propertyName) {
-        return emptyIfNull(this.properties.getProperty(propertyName));
-    }
-
-    private String emptyIfNull(final String text) {
-        if (null == text) {
-            return "";
-        }
-        return text;
+        return Text.emptyIfNull(this.properties.getProperty(propertyName));
     }
 
     public static class PropertiesNotFoundException extends IOException {
