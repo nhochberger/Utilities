@@ -1,5 +1,6 @@
-package hochberger.utilities.application.parameter.checker;
+package hochberger.utilities.application.parameter.checker.aspects;
 
+import hochberger.utilities.application.parameter.checker.ParameterChecker;
 import hochberger.utilities.application.parameter.checker.ParameterChecker.ParameterAspect;
 
 import java.util.List;
