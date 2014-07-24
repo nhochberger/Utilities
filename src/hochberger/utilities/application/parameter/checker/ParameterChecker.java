@@ -1,5 +1,7 @@
 package hochberger.utilities.application.parameter.checker;
 
+import hochberger.utilities.application.parameter.checker.aspects.ParameterAspect;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,12 +39,5 @@ public class ParameterChecker {
             return this.errorDescriptions;
         }
         return Arrays.asList("Parameters are okay.");
-    }
-
-    public static interface ParameterAspect {
-
-        public boolean appliesTo(List<String> args);
-
-        public String getErrorDescription();
     }
 }

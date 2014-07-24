@@ -1,6 +1,5 @@
 package hochberger.utilities.application.parameter.checker.aspects;
 
-import hochberger.utilities.application.parameter.checker.ParameterChecker.ParameterAspect;
 import hochberger.utilities.text.Text;
 
 import java.io.File;

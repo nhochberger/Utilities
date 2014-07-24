@@ -1,4 +1,6 @@
-package hochberger.utilities.files;
+package hochberger.utilities.files.checker;
+
+import hochberger.utilities.files.checker.aspects.FileAspect;
 
 import java.io.File;
 import java.util.Arrays;
@@ -27,9 +29,5 @@ public class FileChecker {
             }
         }
         return true;
-    }
-
-    public static interface FileAspect {
-        public boolean appliesTo(List<File> files);
     }
 }
