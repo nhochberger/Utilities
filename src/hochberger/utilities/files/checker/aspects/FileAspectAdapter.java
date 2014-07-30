@@ -13,7 +13,7 @@ public abstract class FileAspectAdapter implements FileAspect {
     public boolean appliesTo(final List<File> files) {
         boolean result = true;
         for (File file : files) {
-            performCheckOn(file);
+            result = performCheckOn(file);
         }
         return result;
     }
