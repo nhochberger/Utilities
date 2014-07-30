@@ -52,7 +52,8 @@ public final class Text {
 
     public static Iterable<String> toIterable(final String source,
             final String separator) {
-        return Arrays.asList(Text.emptyIfNull(source).split(separator));
+        return Arrays.asList(Text.emptyIfNull(source).split(
+                Text.emptyIfNull(separator)));
     }
 
     public static String trim(final String source) {
