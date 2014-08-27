@@ -4,7 +4,7 @@
  * are made available under the terms of the GNU Lesser Public License v2.1
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
+ *
  * Contributors:
  *     Nico Hochberger - initial API and implementation
  ******************************************************************************/
@@ -103,6 +103,7 @@ public abstract class EDTSafeFrame {
      */
     protected void setSize(final int width, final int height) {
         this.frame.setSize(new Dimension(width, height));
+        this.frame.setPreferredSize(new Dimension(width, height));
     }
 
     protected void exitOnClose() {
@@ -161,7 +162,7 @@ public abstract class EDTSafeFrame {
                 }
                 frame().setVisible(true);
                 EDTSafeFrame.this.maximizedExpectation
-                        .applyExpectationTo(frame());
+                .applyExpectationTo(frame());
             }
         });
     }
