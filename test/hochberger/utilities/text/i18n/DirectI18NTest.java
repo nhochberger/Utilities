@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class I18NFrameworkTest {
+public class DirectI18NTest {
 
     @Test
     public void testDirectI18NSimple() {
