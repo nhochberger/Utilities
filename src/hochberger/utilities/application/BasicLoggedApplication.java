@@ -4,7 +4,7 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Layout;
 import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
+import org.apache.log4j.PatternLayout;
 
 public abstract class BasicLoggedApplication implements Lifecycle {
 
@@ -13,8 +13,8 @@ public abstract class BasicLoggedApplication implements Lifecycle {
     protected static void setUpLoggingServices(final Class<?> applicationClass) {
         try {
             logger = Logger.getLogger(applicationClass);
-            final Layout layout = new SimpleLayout();
-            logger.addAppender(new ConsoleAppender(layout));
+            final Layout layout = new PatternLayout("%d %p (%t): %m%n");
+            logger.addAppender(new ConsoleAppender(layout, "System.out"));
             logger.addAppender(new FileAppender(layout, "logs/main.log"));
         } catch (final Exception e) {
             System.err
