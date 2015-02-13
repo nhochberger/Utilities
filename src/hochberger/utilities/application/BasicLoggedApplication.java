@@ -18,7 +18,7 @@ public abstract class BasicLoggedApplication implements Lifecycle {
             logger.addAppender(new FileAppender(layout, "logs/main.log"));
         } catch (final Exception e) {
             System.err
-            .println("Error while setting up logging service. Application will be shut down.");
+                    .println("Error while setting up logging service. Application will be shut down.");
             e.printStackTrace();
             System.exit(0);
         }
@@ -29,6 +29,16 @@ public abstract class BasicLoggedApplication implements Lifecycle {
             throw new LoggerNotInitializedException();
         }
         return logger;
+    }
+
+    @Override
+    public void start() {
+        logger().info("Starting application");
+    }
+
+    @Override
+    public void stop() {
+        logger().info("Stop application");
     }
 
     protected Logger logger() {
