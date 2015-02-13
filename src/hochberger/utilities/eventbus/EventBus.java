@@ -4,7 +4,7 @@
  * are made available under the terms of the GNU Lesser Public License v2.1
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
+ *
  * Contributors:
  *     Nico Hochberger - initial API and implementation
  ******************************************************************************/
@@ -12,10 +12,10 @@ package hochberger.utilities.eventbus;
 
 public interface EventBus {
 
-    public <TYPE extends Event> void register(EventReceiver receiver,
+    public <TYPE extends Event> void register(EventReceiver<TYPE> receiver,
             Class<TYPE> event);
 
-    public void deregister(EventReceiver receiver);
+    public <TYPE extends Event> void deregister(EventReceiver<TYPE> receiver);
 
     public <TYPE extends Event> void publishFromEDT(TYPE event);
 

@@ -4,13 +4,13 @@
  * are made available under the terms of the GNU Lesser Public License v2.1
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
+ *
  * Contributors:
  *     Nico Hochberger - initial API and implementation
  ******************************************************************************/
 package hochberger.utilities.eventbus;
 
-public interface EventReceiver {
+public interface EventReceiver<TYPE extends Event> {
 
-    public <TYPE extends Event> void receive(TYPE event);
+    public void receive(TYPE event);
 }

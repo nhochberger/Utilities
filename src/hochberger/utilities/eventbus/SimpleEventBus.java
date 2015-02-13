@@ -4,7 +4,7 @@
  * are made available under the terms of the GNU Lesser Public License v2.1
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
+ *
  * Contributors:
  *     Nico Hochberger - initial API and implementation
  ******************************************************************************/
@@ -30,8 +30,8 @@ public class SimpleEventBus implements EventBus {
     }
 
     @Override
-    public <TYPE extends Event> void register(final EventReceiver receiver,
-            final Class<TYPE> eventType) {
+    public <TYPE extends Event> void register(
+            final EventReceiver<TYPE> receiver, final Class<TYPE> eventType) {
         LogToConsole.debug("Registering object of type "
                 + receiver.getClass().getSimpleName()
                 + " to receive notifications of type "

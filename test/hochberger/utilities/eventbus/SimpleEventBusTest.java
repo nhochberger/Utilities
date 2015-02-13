@@ -4,7 +4,7 @@
  * are made available under the terms of the GNU Lesser Public License v2.1
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
+ *
  * Contributors:
  *     Nico Hochberger - initial API and implementation
  ******************************************************************************/
@@ -34,7 +34,8 @@ public class SimpleEventBusTest {
         }
     }
 
-    protected static class SimpleEventReceiver implements EventReceiver {
+    protected static class SimpleEventReceiver implements
+    EventReceiver<SimpleTestEvent> {
 
         protected boolean hasReceived;
 
@@ -43,7 +44,7 @@ public class SimpleEventBusTest {
         }
 
         @Override
-        public <TYPE extends Event> void receive(final TYPE event) {
+        public void receive(final SimpleTestEvent event) {
             this.hasReceived = true;
         }
 
