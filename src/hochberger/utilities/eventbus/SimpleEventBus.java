@@ -10,7 +10,6 @@
  ******************************************************************************/
 package hochberger.utilities.eventbus;
 
-import hochberger.utilities.logging.LogToConsole;
 import hochberger.utilities.threading.ThreadRunner;
 
 import java.util.ArrayList;
@@ -32,10 +31,6 @@ public class SimpleEventBus implements EventBus {
     @Override
     public <TYPE extends Event> void register(
             final EventReceiver<TYPE> receiver, final Class<TYPE> eventType) {
-        LogToConsole.debug("Registering object of type "
-                + receiver.getClass().getSimpleName()
-                + " to receive notifications of type "
-                + eventType.getSimpleName());
         synchronized (this.receivers) {
             List<EventReceiver> list = this.receivers.get(eventType);
             if (null == list) {
