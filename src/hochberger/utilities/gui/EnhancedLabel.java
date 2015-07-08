@@ -58,7 +58,7 @@ public class EnhancedLabel extends JLabel {
     @Override
     public void paintComponent(final Graphics g) {
         ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
         final char[] chars = getText().toCharArray();
         final FontMetrics fm = this.getFontMetrics(getFont());
 
