@@ -30,4 +30,13 @@ public class FontLoader {
         }
         return result;
     }
+
+    public static Font loadFromWithFallback(final String filePath,
+            final Font fallback) {
+        Font result = loadFrom(filePath);
+        if (null == result) {
+            result = fallback;
+        }
+        return result;
+    }
 }
