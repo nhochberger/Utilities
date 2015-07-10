@@ -10,7 +10,6 @@ public class VersionComparator implements Comparator<String> {
 
     @Override
     public int compare(final String oldVersion, final String newVersion) {
-        System.err.println("---------");
         final String[] oldDigits = oldVersion.split("\\.");
         final String[] newDigits = newVersion.split("\\.");
         for (int i = 0; i < Math.min(oldDigits.length, newDigits.length); i++) {
