@@ -10,7 +10,7 @@ public class ToMilis {
         return 1000 * seconds;
     }
 
-    public static long seconds(final float seconds) {
+    public static long seconds(final double seconds) {
         return (long) (1000 * seconds);
     }
 
@@ -18,7 +18,7 @@ public class ToMilis {
         return minutes * seconds(60);
     }
 
-    public static long minutes(final float minutes) {
+    public static long minutes(final double minutes) {
         return (long) (minutes * seconds(60));
     }
 
@@ -26,7 +26,7 @@ public class ToMilis {
         return hours * minutes(60);
     }
 
-    public static long hours(final float hours) {
+    public static long hours(final double hours) {
         return (long) (hours * minutes(60));
     }
 
@@ -34,7 +34,7 @@ public class ToMilis {
         return days * hours(24);
     }
 
-    public static long days(final float days) {
+    public static long days(final double days) {
         return (long) (days * hours(24));
     }
 }
