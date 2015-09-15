@@ -37,4 +37,8 @@ public abstract class WrappedComponent<TYPE extends Component> {
     public TYPE getComponent() {
         return component();
     }
+
+    protected boolean isBuilt() {
+        return this.isBuilt;
+    }
 }
