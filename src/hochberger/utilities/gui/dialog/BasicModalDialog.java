@@ -9,6 +9,8 @@ import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -19,6 +21,12 @@ import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
 
+/**
+ *
+ * Note that dies dialog is not EDT-safe itself. build() as well as show() and
+ * hide() have to be called on the EDT.
+ *
+ */
 public class BasicModalDialog extends WrappedComponent<JDialog> {
 
     private final I18N cancelText;
@@ -26,6 +34,7 @@ public class BasicModalDialog extends WrappedComponent<JDialog> {
     private final I18N text;
     private final I18N commitText;
     private boolean closedByCommit;
+    private final List<DialogCloseListener> closeListeners;
 
     public BasicModalDialog(final I18N title, final I18N text,
             final I18N commitText, final I18N cancelText) {
@@ -35,6 +44,7 @@ public class BasicModalDialog extends WrappedComponent<JDialog> {
         this.commitText = commitText;
         this.cancelText = cancelText;
         this.closedByCommit = false;
+        this.closeListeners = new LinkedList<>();
     }
 
     public BasicModalDialog(final I18N title, final I18N text) {
@@ -45,10 +55,11 @@ public class BasicModalDialog extends WrappedComponent<JDialog> {
     protected void buildComponent() {
         final JDialog dialog = new JDialog();
         setComponent(dialog);
-        dialog.setModalityType(ModalityType.MODELESS);
+        dialog.setModalityType(ModalityType.APPLICATION_MODAL);
         dialog.setAlwaysOnTop(true);
         dialog.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         dialog.setLayout(new MigLayout("", "10[center]10", "10[]5[]15[]10"));
+        dialog.setTitle(this.title.toString());
         final JLabel titleLabel = new JLabel(this.title.toString());
         titleLabel.setFont(titleLabel.getFont().deriveFont(40f));
         final JTextArea textArea = new JTextArea(this.text.toString());
@@ -85,6 +96,7 @@ public class BasicModalDialog extends WrappedComponent<JDialog> {
         dialog.add(buttonPanel);
         dialog.pack();
         dialog.setResizable(false);
+        dialog.setLocationRelativeTo(null);
     }
 
     public void show() {
@@ -99,9 +111,29 @@ public class BasicModalDialog extends WrappedComponent<JDialog> {
             return;
         }
         getComponent().setVisible(false);
+        for (final DialogCloseListener listener : this.closeListeners) {
+            listener.actionPerformed();
+        }
     }
 
     public boolean wasClosedByCommit() {
         return this.closedByCommit;
+    }
+
+    public void addCloseListener(final DialogCloseListener listener) {
+        this.closeListeners.add(listener);
+    }
+
+    public void removeCloseListener(final DialogCloseListener listener) {
+        this.closeListeners.remove(listener);
+    }
+
+    public static abstract class DialogCloseListener {
+
+        public DialogCloseListener() {
+            super();
+        }
+
+        public abstract void actionPerformed();
     }
 }
