@@ -1,6 +1,6 @@
 package hochberger.utilities.text.i18n;
 
-public class DirectI18N {
+public class DirectI18N implements I18N {
 
     private final String resolvedText;
 
