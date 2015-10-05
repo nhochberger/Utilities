@@ -4,5 +4,4 @@ public interface I18N {
 
     @Override
     public String toString();
-
 }
