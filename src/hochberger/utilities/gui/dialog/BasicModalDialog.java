@@ -72,6 +72,7 @@ public class BasicModalDialog extends WrappedComponent<JDialog> {
         textArea.setOpaque(false);
         dialog.add(titleLabel, "wrap");
         dialog.add(textArea, "wrap");
+
         final JButton commitButton = new JButton(this.commitText.toString());
         commitButton.addActionListener(new ActionListener() {
 
@@ -94,9 +95,14 @@ public class BasicModalDialog extends WrappedComponent<JDialog> {
                 .wrap(commitButton, cancelButton);
         buttonPanel.setLayout(new MigLayout("", "push[]35[]push", "0[]0"));
         dialog.add(buttonPanel);
+        prePackHook();
         dialog.pack();
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(null);
+    }
+
+    protected void prePackHook() {
+        // for subclass usage
     }
 
     public void show() {
