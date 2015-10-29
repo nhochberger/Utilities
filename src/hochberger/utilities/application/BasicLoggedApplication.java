@@ -38,7 +38,8 @@ public abstract class BasicLoggedApplication implements Lifecycle {
 
     @Override
     public void stop() {
-        logger().info("Stop application");
+        logger().info("Exiting application.");
+        System.exit(0);
     }
 
     protected Logger logger() {
