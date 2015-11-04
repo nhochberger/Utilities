@@ -1,18 +1,20 @@
 package hochberger.utilities.geo;
 
+import java.lang.reflect.Field;
+
 public class GeoInformation {
 
     private String ip;
-    private String countryCode;
-    private String countryName;
-    private String regionCode;
-    private String regionName;
+    private String country_code;
+    private String country_name;
+    private String region_code;
+    private String region_name;
     private String city;
-    private String zipCode;
-    private String timeZone;
-    private String latitude;
-    private String longitude;
-    private String metroCode;
+    private String zip_code;
+    private String time_zone;
+    private float latitude;
+    private float longitude;
+    private String metro_code;
 
     public GeoInformation() {
         super();
@@ -27,35 +29,35 @@ public class GeoInformation {
     }
 
     public String getCountryCode() {
-        return this.countryCode;
+        return this.country_code;
     }
 
     public void setCountryCode(final String countryCode) {
-        this.countryCode = countryCode;
+        this.country_code = countryCode;
     }
 
     public String getCountryName() {
-        return this.countryName;
+        return this.country_name;
     }
 
     public void setCountryName(final String countryName) {
-        this.countryName = countryName;
+        this.country_name = countryName;
     }
 
     public String getRegionCode() {
-        return this.regionCode;
+        return this.region_code;
     }
 
     public void setRegionCode(final String regionCode) {
-        this.regionCode = regionCode;
+        this.region_code = regionCode;
     }
 
     public String getRegionName() {
-        return this.regionName;
+        return this.region_name;
     }
 
     public void setRegionName(final String regionName) {
-        this.regionName = regionName;
+        this.region_name = regionName;
     }
 
     public String getCity() {
@@ -67,42 +69,59 @@ public class GeoInformation {
     }
 
     public String getZipCode() {
-        return this.zipCode;
+        return this.zip_code;
     }
 
     public void setZipCode(final String zipCode) {
-        this.zipCode = zipCode;
+        this.zip_code = zipCode;
     }
 
     public String getTimeZone() {
-        return this.timeZone;
+        return this.time_zone;
     }
 
     public void setTimeZone(final String timeZone) {
-        this.timeZone = timeZone;
+        this.time_zone = timeZone;
     }
 
-    public String getLatitude() {
+    public float getLatitude() {
         return this.latitude;
     }
 
-    public void setLatitude(final String latitude) {
+    public void setLatitude(final float latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public float getLongitude() {
         return this.longitude;
     }
 
-    public void setLongitude(final String longitude) {
+    public void setfloatitude(final float longitude) {
         this.longitude = longitude;
     }
 
     public String getMetroCode() {
-        return this.metroCode;
+        return this.metro_code;
     }
 
     public void setMetroCode(final String metroCode) {
-        this.metroCode = metroCode;
+        this.metro_code = metroCode;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder();
+        result.append("GeoInformation: ");
+        for (final Field field : this.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            result.append(field.getName()).append(": ");
+            try {
+                result.append(field.get(this));
+            } catch (IllegalArgumentException | IllegalAccessException e) {
+                result.append("n/a");
+            }
+            result.append(", ");
+        }
+        return result.toString();
     }
 }
