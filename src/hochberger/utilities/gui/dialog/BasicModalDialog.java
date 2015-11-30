@@ -88,7 +88,6 @@ public class BasicModalDialog extends WrappedComponent<JDialog> {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 hide();
-                BasicModalDialog.this.closedByCommit = false;
             }
         });
         final JPanel buttonPanel = PanelWrapper
