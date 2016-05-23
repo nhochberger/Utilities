@@ -31,8 +31,8 @@ public abstract class EDTSafeFrame {
         YES {
             @Override
             public void applyExpectationTo(final JFrame frame) {
-                frame.setExtendedState(frame.getExtendedState()
-                        | Frame.MAXIMIZED_BOTH);
+                frame.setExtendedState(
+                        frame.getExtendedState() | Frame.MAXIMIZED_BOTH);
             }
         },
         NO {
@@ -106,6 +106,10 @@ public abstract class EDTSafeFrame {
         this.frame.setPreferredSize(new Dimension(width, height));
     }
 
+    protected void disposeOnClose() {
+        this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
     protected void exitOnClose() {
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -162,7 +166,7 @@ public abstract class EDTSafeFrame {
                 }
                 frame().setVisible(true);
                 EDTSafeFrame.this.maximizedExpectation
-                .applyExpectationTo(frame());
+                        .applyExpectationTo(frame());
             }
         });
     }
