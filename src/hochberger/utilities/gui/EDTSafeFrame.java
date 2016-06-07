@@ -16,6 +16,7 @@ import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.LayoutManager;
+import java.awt.event.WindowListener;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JComponent;
@@ -233,5 +234,9 @@ public abstract class EDTSafeFrame {
 
     protected void setIcon(final Image image) {
         frame().setIconImage(image);
+    }
+
+    public void addWindowListener(final WindowListener listener) {
+        frame().addWindowListener(listener);
     }
 }
