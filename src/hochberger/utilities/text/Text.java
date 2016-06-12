@@ -20,6 +20,14 @@ public final class Text {
         return " ";
     }
 
+    public static String space(final int n) {
+        String result = "";
+        for (int i = 0; i < n; i++) {
+            result += Text.space();
+        }
+        return result;
+    }
+
     public static String newLine() {
         return "\n";
     }
@@ -37,23 +45,23 @@ public final class Text {
 
     public static String fromIterable(final Iterable<?> iterable,
             final String separator) {
-        StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
         if (Iterables.isEmpty(iterable)) {
             return Text.empty();
         }
-        for (Object object : iterable) {
+        for (final Object object : iterable) {
             result.append(object.toString());
             result.append(separator);
         }
-        int end = result.length();
+        final int end = result.length();
         result.delete(end - separator.length(), end);
         return result.toString();
     }
 
     public static Iterable<String> toIterable(final String source,
             final String separator) {
-        return Arrays.asList(Text.emptyIfNull(source).split(
-                Text.emptyIfNull(separator)));
+        return Arrays.asList(
+                Text.emptyIfNull(source).split(Text.emptyIfNull(separator)));
     }
 
     public static String trim(final String source) {
@@ -61,8 +69,8 @@ public final class Text {
     }
 
     public static Iterable<String> trimAll(final Iterable<String> source) {
-        List<String> result = new LinkedList<>();
-        for (String string : source) {
+        final List<String> result = new LinkedList<>();
+        for (final String string : source) {
             result.add(Text.trim(string));
         }
         return result;
