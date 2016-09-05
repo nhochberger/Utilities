@@ -1,10 +1,10 @@
 package hochberger.utilities.application;
 
-import hochberger.utilities.exceptions.NotYetImplementedException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class ResourceLoader {
 
@@ -18,7 +18,14 @@ public class ResourceLoader {
 
     public static File loadFile(final String filePath)
             throws FileNotFoundException {
-        throw new NotYetImplementedException();
+        // throw new NotYetImplementedException();
+        final URL systemResource = ClassLoader.getSystemResource(filePath);
+        try {
+            final File file = new File(systemResource.toURI());
+            return file;
+        } catch (final URISyntaxException e) {
+            throw new FileNotFoundException(e.getMessage());
+        }
         // InputStream resourceAsStream = ClassLoader
         // .getSystemResourceAsStream(filePath);
         // String[] split = filePath.split("\\.");
