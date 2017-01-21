@@ -45,4 +45,12 @@ public class Vector3DTest {
         vector2 = new Vector3D(-3, 3, 1);
         assertEquals(69.5, vector1.angleTo(vector2), 0.1);
     }
+
+    @Test
+    public void testRotation() {
+        final Vector3D xDirection = new Vector3D(1d, 0d, 0d);
+        final Vector3D rotated90z = xDirection
+                .rotateVectorZ(Math.toRadians(90d));
+        assertEquals(0d, rotated90z.getX(), 0.01);
+    }
 }

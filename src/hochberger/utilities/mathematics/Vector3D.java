@@ -63,4 +63,40 @@ public class Vector3D {
         return Math.toDegrees(Math.acos(vectorProduct(other)
                 / (absoluteValue() * other.absoluteValue())));
     }
+
+    /**
+     * @param alpha
+     *            - angle by which the vector is rotated around the x-axis
+     * @return new vector which is a rotated version of the current one
+     */
+    public Vector3D rotateVectorX(final double alpha) {
+        final double newX = this.x;
+        final double newY = this.y * Math.cos(alpha) - this.z * Math.sin(alpha);
+        final double newZ = this.y * Math.sin(alpha) + this.z * Math.cos(alpha);
+        return new Vector3D(newX, newY, newZ);
+    }
+
+    /**
+     * @param beta
+     *            - angle by which the vector is rotated around the y-axis
+     * @return new vector which is a rotated version of the current one
+     */
+    public Vector3D rotateVectorY(final double beta) {
+        final double newX = this.x * Math.cos(beta) + this.z * Math.sin(beta);
+        final double newY = this.y;
+        final double newZ = -this.x * Math.sin(beta) + this.z * Math.cos(beta);
+        return new Vector3D(newX, newY, newZ);
+    }
+
+    /**
+     * @param gamma
+     *            - angle by which the vector is rotated around the z-axis
+     * @return new vector which is a rotated version of the current one
+     */
+    public Vector3D rotateVectorZ(final double gamma) {
+        final double newX = this.x * Math.cos(gamma) - this.y * Math.sin(gamma);
+        final double newY = this.x * Math.sin(gamma) + this.y * Math.cos(gamma);
+        final double newZ = this.z;
+        return new Vector3D(newX, newY, newZ);
+    }
 }
