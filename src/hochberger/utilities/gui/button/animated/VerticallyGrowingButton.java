@@ -184,11 +184,11 @@ public class VerticallyGrowingButton extends JComponent implements
     }
 
     private void setButtonColorOn(final Graphics2D graphics) {
-        if (isEnabled()) {
+//        if (isEnabled()) {
             graphics.setColor(this.buttonColor);
-            return;
-        }
-        graphics.setColor(Color.LIGHT_GRAY);
+//            return;
+//        }
+//        graphics.setColor(Color.LIGHT_GRAY);
     }
 
     private void drawImageOn(final Graphics2D graphics) {

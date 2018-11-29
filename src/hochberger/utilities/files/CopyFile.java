@@ -26,15 +26,21 @@ public class CopyFile {
         if (!destination.exists()) {
             destination.createNewFile();
         }
+        FileInputStream inputStream = null;
         FileChannel reader = null;
+        FileOutputStream outputStream = null;
         FileChannel writer = null;
         try {
-            reader = new FileInputStream(this.source).getChannel();
-            writer = new FileOutputStream(destination).getChannel();
+            inputStream = new FileInputStream(this.source);
+            reader = inputStream.getChannel();
+            outputStream = new FileOutputStream(destination);
+            writer = outputStream.getChannel();
             writer.transferFrom(reader, 0, reader.size());
         } finally {
             Closer.close(reader);
+            Closer.close(inputStream);
             Closer.close(writer);
+            Closer.close(outputStream);
         }
     }
 }

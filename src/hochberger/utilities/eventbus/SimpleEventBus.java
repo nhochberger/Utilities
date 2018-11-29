@@ -10,15 +10,15 @@
  ******************************************************************************/
 package hochberger.utilities.eventbus;
 
-import hochberger.utilities.threading.ThreadRunner;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import edt.EDT;
+import hochberger.utilities.threading.ThreadRunner;
 
+@SuppressWarnings("rawtypes")
 public class SimpleEventBus implements EventBus {
 
     private final Map<Class<? extends Event>, List<EventReceiver>> receivers;
@@ -46,6 +46,7 @@ public class SimpleEventBus implements EventBus {
         // TODO Auto-generated method stub
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <TYPE extends Event> void publish(final TYPE event) {
         EDT.never();
